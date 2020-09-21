@@ -1,11 +1,13 @@
 package clicker;
 
-import org.openqa.selenium.By;
+import clicker.Seosprint.WorkSeo;
+import clicker.helpers.PageKeeper;
+import clicker.helpers.Waiters;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
 
@@ -24,10 +26,23 @@ public class Main {
 
         WebDriver driver = new ChromeDriver(options);
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
 
-        driver.get("https://seosprint.net/");
-        //   driver.quit();
+
+        WorkSeo workSeo = new WorkSeo(driver);
+
+        workSeo.autorize(driver);
+
+
+
+        while (true) {
+            workSeo.makeSurf();
+            if (PageKeeper.getInstance().flag)
+                workSeo.doTasks();
+            Waiters.timeout(600, 1200);
+            driver.navigate().refresh();
+        }
 
     }
 }

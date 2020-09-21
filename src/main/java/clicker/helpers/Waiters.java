@@ -1,4 +1,4 @@
-package com.helper;
+package clicker.helpers;
 
 import java.util.Random;
 

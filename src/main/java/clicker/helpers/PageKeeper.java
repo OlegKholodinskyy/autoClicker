@@ -1,13 +1,13 @@
+package clicker.helpers;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by oleg on 24.05.2020.
- */
 public class PageKeeper {
+
     Map<String, String> pages = new HashMap<String, String>();
 
     private PageKeeper() {
@@ -30,7 +30,15 @@ public class PageKeeper {
         pages.put(name, title);
     }
 
-    public void openNewTab(WebDriver driver){
-        ((JavascriptExecutor)driver).executeScript("window.open()");
+    public void remotePageFromMap(String name, String title) {
+        pages.remove(name);
     }
+
+    public void openNewTab(WebDriver driver) {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+    }
+
+    //temp
+    public boolean flag = true;
+
 }

@@ -1,2 +1,2 @@
 # autoClicker
-( for test only )
+( for test only z)
